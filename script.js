@@ -1,5 +1,5 @@
 // Google Sheets CSV URL
-const sheetUrl = "https://docs.google.com/spreadsheets/d/1oDtwyGB7ArzmWtP81I2QeBNXAiEefgTOepAHqwRfNZs/edit?gid=0#gid=0";
+const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0D7_9n5fJGj30Erv8CEr3rz7UGPh3qdvSx79RiVCf2iuT_yZw51mr-9cdGxpyXbSPTbYXcuHC8cPk/pub?output=csv";
 
 // Fetch data from Google Sheets
 fetch(sheetUrl)
