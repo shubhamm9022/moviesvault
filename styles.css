@@ -1,4 +1,25 @@
-/* Basic Reset */
+/* Logo and Title Styling */
+.logo-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    animation: slideInDown 1s ease-out;
+}
+
+.logo-title img {
+    height: 60px;
+    width: auto;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Adjust title when paired with logo */
+.logo-title h1 {
+    font-size: 2.5em;
+    letter-spacing: 2px;
+    margin: 0;
+}/* Basic Reset */
 * {
     box-sizing: border-box;
     margin: 0;
