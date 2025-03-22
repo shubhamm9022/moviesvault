@@ -18,7 +18,7 @@ fetch(sheetUrl)
 
         // Update the webpage content with movie data
         document.getElementById("movie-poster").src = movie.poster;
-        document.getElementById("movie-title").innerText = ${movie.title} (${movie.year});
+        document.getElementById("movie-title").innerText = `${movie.title} (${movie.year})`;
         document.getElementById("stream-link").href = movie.streamLink;
         document.getElementById("download-link").href = movie.downloadLink;
     })
