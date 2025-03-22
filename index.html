@@ -3,23 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> logo.png </title>
+    <title>Movie Vault HQ</title>
     <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
 
     <div class="container">
         <h1>Movie Vault HQ</h1>
 
-        <div class="movie-card">
-            <img src="poster-placeholder.jpg" alt="Movie Poster">
-            <h2>Movie Title (Year)</h2>
+        <!-- Movie Card (Content will be filled by JS) -->
+        <div class="movie-card" id="movie-card">
+            <img src="" alt="Movie Poster" id="movie-poster">
+            <h2 id="movie-title">Loading...</h2>
             <div class="buttons">
-                <a href="#" class="btn stream">Watch Now</a>
-                <a href="#" class="btn download">Download</a>
+                <a href="#" class="btn stream" id="stream-link">Stream</a>
+                <a href="#" class="btn download" id="download-link">Download</a>
             </div>
         </div>
 
+        <!-- Footer -->
         <footer>
             <p>Follow us on Telegram: <a href="https://t.me/movievaultHQ">@movievaultHQ</a></p>
         </footer>
