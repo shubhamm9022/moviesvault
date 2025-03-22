@@ -1,35 +1,31 @@
-const sheetURL = "https://opensheet.elk.sh/1oDtwyGB7ArzmWtP81I2QeBNXAiEefgTOepAHqwRfNZs/Movies-Vault.HQ";
+// Google Sheet Config
+const sheetID = "1oDtwyGB7ArzmWtP81I2QeBNXAiEefgTOepAHqwRfNZs";
+const sheetName = "Movies-Vault.HQ";
+const apiKey = "AIzaSyDkPV6ae3_tKLa3MnuDtoVNl_WXc08zM9U";
+const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/${sheetName}?key=${apiKey}`;
 
-// Fetch data from Google Sheet
-async function fetchMovies() {
-    try {
-        const response = await fetch(sheetURL);
-        const movies = await response.json();
+// Fetch data from Google Sheets
+fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        const rows = data.values;
+        const params = new URLSearchParams(window.location.search);
+        const movieName = params.get("movie");
 
-        displayMovie(movies);
-    } catch (error) {
-        console.error("Failed to load movies:", error);
-        document.querySelector('.container').innerHTML = `<h1>Failed to load movie data!</h1>`;
-    }
-}
+        if (movieName) {
+            const movie = rows.find(row => row[0].toLowerCase() === movieName.toLowerCase());
+            if (movie) {
+                const [title, year, posterUrl, streamLink, downloadLink] = movie;
 
-// Display a specific movie based on URL
-function displayMovie(movies) {
-    const urlParams = new URLSearchParams(window.location.search);
-    const selectedMovie = urlParams.get('movie');
-
-    const movie = movies.find(m => m.TITLE.toLowerCase() === selectedMovie?.toLowerCase());
-
-    if (movie) {
-        document.getElementById('movie-poster').src = movie['POSTER URL'];
-        document.getElementById('movie-poster').alt = `${movie.TITLE} Movie Poster`;
-        document.getElementById('movie-title').innerText = `${movie.TITLE} (${movie.YEAR})`;
-        document.getElementById('stream-link').href = movie['STREAM LINK'];
-        document.getElementById('download-link').href = movie['DOWNLOAD LINK'];
-    } else {
-        document.querySelector('.container').innerHTML = `<h1>Movie not found!</h1>`;
-    }
-}
-
-// Load movie on page load
-fetchMovies();
+                document.querySelector("#movie-poster").src = posterUrl;
+                document.querySelector("#movie-title").innerText = `${title} (${year})`;
+                document.querySelector("#stream-link").href = streamLink;
+                document.querySelector("#download-link").href = downloadLink;
+            } else {
+                document.querySelector("#movie-title").innerText = "Movie Not Found";
+            }
+        } else {
+            document.querySelector("#movie-title").innerText = "No Movie Selected";
+        }
+    })
+    .catch(err => console.error("Error loading movie data:", err));
