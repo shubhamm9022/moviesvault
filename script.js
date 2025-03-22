@@ -1,31 +1,25 @@
-// Google Sheet Config
-const sheetID = "1oDtwyGB7ArzmWtP81I2QeBNXAiEefgTOepAHqwRfNZs";
-const sheetName = "Movies-Vault.HQ";
-const apiKey = "AIzaSyDkPV6ae3_tKLa3MnuDtoVNl_WXc08zM9U";
-const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/${sheetName}?key=${apiKey}`;
+// Google Sheets CSV URL
+const sheetUrl = "https://docs.google.com/spreadsheets/d/1oDtwyGB7ArzmWtP81I2QeBNXAiEefgTOepAHqwRfNZs/edit?gid=0#gid=0";
 
 // Fetch data from Google Sheets
-fetch(url)
-    .then(response => response.json())
+fetch(sheetUrl)
+    .then(response => response.text())
     .then(data => {
-        const rows = data.values;
-        const params = new URLSearchParams(window.location.search);
-        const movieName = params.get("movie");
+        const rows = data.split("\n").slice(1); // Split rows, ignore the first header row
+        const latestMovie = rows[rows.length - 1].split(","); // Get the last movie added
 
-        if (movieName) {
-            const movie = rows.find(row => row[0].toLowerCase() === movieName.toLowerCase());
-            if (movie) {
-                const [title, year, posterUrl, streamLink, downloadLink] = movie;
+        const movie = {
+            title: latestMovie[0],
+            year: latestMovie[1],
+            poster: latestMovie[2],
+            streamLink: latestMovie[3],
+            downloadLink: latestMovie[4],
+        };
 
-                document.querySelector("#movie-poster").src = posterUrl;
-                document.querySelector("#movie-title").innerText = `${title} (${year})`;
-                document.querySelector("#stream-link").href = streamLink;
-                document.querySelector("#download-link").href = downloadLink;
-            } else {
-                document.querySelector("#movie-title").innerText = "Movie Not Found";
-            }
-        } else {
-            document.querySelector("#movie-title").innerText = "No Movie Selected";
-        }
+        // Update the webpage content with movie data
+        document.getElementById("movie-poster").src = movie.poster;
+        document.getElementById("movie-title").innerText = ${movie.title} (${movie.year});
+        document.getElementById("stream-link").href = movie.streamLink;
+        document.getElementById("download-link").href = movie.downloadLink;
     })
-    .catch(err => console.error("Error loading movie data:", err));
+    .catch(error => console.error("Error loading movie data:", error));
