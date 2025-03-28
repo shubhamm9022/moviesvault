@@ -34,7 +34,6 @@ body {
     height: auto;
 }
 
-/* Responsive Logo */
 @media (max-width: 600px) {
     .logo {
         max-width: 220px;
@@ -54,10 +53,10 @@ body {
 
 /* Movie Cards */
 .movie-card {
-    background: #1a1a1a; /* Dark but stylish */
+    background: #1a1a1a;
     padding: 15px;
     border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Thin stylish border */
+    border: 1px solid rgba(255, 255, 255, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     margin-bottom: 15px;
     display: flex;
@@ -65,7 +64,6 @@ body {
     align-items: center;
 }
 
-/* Hover Effect */
 .movie-card:hover {
     transform: scale(1.03);
     box-shadow: 0 6px 15px rgba(255, 255, 255, 0.3);
@@ -74,7 +72,7 @@ body {
 /* Movie Poster Styling */
 .movie-card img {
     width: 100%;
-    max-width: 240px; /* Perfect size for mobile & desktop */
+    max-width: 240px;
     border-radius: 8px;
     margin-bottom: 10px;
     transition: transform 0.3s ease;
@@ -93,7 +91,7 @@ h2 {
 }
 
 /* ============================= */
-/* 🔗 Buttons */
+/* 🔗 Buttons (Updated to Box Style) */
 /* ============================= */
 .buttons {
     display: flex;
@@ -104,31 +102,40 @@ h2 {
 
 /* Button Styling */
 .btn {
-    padding: 10px 20px;
+    padding: 12px 20px;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
-    transition: transform 0.3s ease, background 0.3s ease;
     font-size: 0.95em;
     font-weight: bold;
+    width: 120px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
 }
 
 /* Stream Button */
 .stream {
+    background-color: transparent;
+    color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.stream:hover {
     background-color: #4CAF50;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
 }
 
 /* Download Button */
 .download {
-    background-color: #2196F3;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: transparent;
+    color: #2196F3;
+    border-color: #2196F3;
 }
 
-/* Button Hover */
-.btn:hover {
-    transform: translateY(-3px) scale(1.05);
-    opacity: 0.9;
+.download:hover {
+    background-color: #2196F3;
+    color: #fff;
 }
 
 /* ============================= */
@@ -210,4 +217,3 @@ footer a:hover {
         opacity: 1;
     }
 }
-
