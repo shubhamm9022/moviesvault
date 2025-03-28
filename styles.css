@@ -20,31 +20,29 @@ body {
 }
 
 /* ============================= */
-/* 🌟 Logo Styling */
+/* 🌟 Logo Styling (No Box, Bigger & Fit) */
 /* ============================= */
 .logo-container {
     width: 100%;
     display: flex;
     justify-content: center;
-    padding: 15px 0;
-    background: rgba(255, 255, 255, 0.1);
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    margin-top: 20px;
 }
 
 .logo {
-    max-width: 300px; /* Bigger logo */
+    max-width: 350px; /* Bigger Logo */
     height: auto;
 }
 
 /* Responsive Logo */
 @media (max-width: 600px) {
     .logo {
-        max-width: 200px;
+        max-width: 250px;
     }
 }
 
 /* ============================= */
-/* 🎬 Movie Card Styling */
+/* 🎬 Movie Card Styling (Restored Look) */
 /* ============================= */
 .container {
     width: 100%;
@@ -58,7 +56,6 @@ body {
     background: #222;
     padding: 15px;
     border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     margin-bottom: 15px;
@@ -191,18 +188,6 @@ footer a:hover {
         opacity: 0;
     }
     to {
-        opacity: 1;
-    }
-}
-
-/* Slide-in from Top Animation */
-@keyframes slideInDown {
-    from {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
         opacity: 1;
     }
 }
