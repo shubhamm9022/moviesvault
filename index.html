@@ -43,16 +43,15 @@
                 const response = await fetch(sheetURL);
                 const data = await response.text();
                 
-                // Parse CSV data
-                const rows = data.split("\n").map(row => row.split(","));
-                const headers = rows[0].map(header => header.trim().toLowerCase());
-
-                movies = rows.slice(1).map(row => {
+                // Parse CSV data manually
+                const rows = data.split("\n").slice(1); // Skip the header row
+                movies = rows.map(row => {
+                    const columns = row.split(",");
                     return {
-                        title: row[headers.indexOf("title")],
-                        poster: row[headers.indexOf("poster")],
-                        stream: row[headers.indexOf("stream")],
-                        download: row[headers.indexOf("download")]
+                        title: columns[0]?.trim(),    // 1st column = Movie Title
+                        poster: columns[1]?.trim(),   // 2nd column = Poster URL
+                        stream: columns[2]?.trim(),   // 3rd column = Stream Link
+                        download: columns[3]?.trim()  // 4th column = Download Link
                     };
                 });
 
@@ -74,7 +73,7 @@
             paginatedMovies.forEach(movie => {
                 movieList.innerHTML += `
                     <div class="movie-card">
-                        <img src="${movie.poster}" alt="${movie.title} Poster" onerror="this.src='fallback.jpg'">
+                        <img src="${movie.poster}" alt="${movie.title} Poster" onerror="this.onerror=null; this.src='fallback.jpg'">
                         <h2>${movie.title}</h2>
                         <div class="buttons">
                             <a href="${movie.stream}" class="btn stream">Stream</a>
@@ -112,5 +111,3 @@
 
 </body>
 </html>
-
-
