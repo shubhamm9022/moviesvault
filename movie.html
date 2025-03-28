@@ -25,22 +25,50 @@
     <script>
         const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0D7_9n5fJGj30Erv8CEr3rz7UGPh3qdvSx79RiVCf2iuT_yZw51mr-9cdGxpyXbSPTbYXcuHC8cPk/pub?output=csv";
 
-        async function fetchMovieDetails() {
-            try {
-                const response = await fetch(sheetURL);
-                const data = await response.text();
-                
-                // Parse CSV properly
-                const rows = data.split("\n").slice(1);
-                const movies = rows.map(row => {
-                    const columns = row.split(",");
-                    return {
-                        title: columns[0]?.trim(),
-                        poster: columns[1]?.trim(),
-                        stream: columns[2]?.trim(),
-                        download: columns[3]?.trim()
-                    };
-                });
+       async function fetchMovieDetails() {
+    try {
+        const response = await fetch(sheetURL);
+        const data = await response.text();
+        
+        const rows = data.split("\n").slice(1);
+        const movies = rows.map(row => {
+            const columns = row.split(",");
+            return {
+                title: columns[0]?.trim(),
+                poster: columns[1]?.trim(),
+                stream: columns[2]?.trim(),
+                download: columns[3]?.trim()
+            };
+        });
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const movieID = urlParams.get("id");
+
+        const movie = movies.find(m => 
+            encodeURIComponent(m.title.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-")) === movieID
+        );
+
+        if (movie) {
+            document.getElementById("loading-text").style.display = "none";
+            document.getElementById("movie-title").innerText = movie.title;
+            document.getElementById("movie-poster").src = movie.poster;
+            document.getElementById("stream-link").href = movie.stream;
+            document.getElementById("download-link").href = movie.download;
+
+            document.getElementById("movie-title").style.display = "block";
+            document.getElementById("movie-poster").style.display = "block";
+            document.querySelector(".buttons").style.display = "block";
+        } else {
+            document.querySelector(".movie-details").innerHTML = "<h2>Movie not found!</h2>";
+        }
+    } catch (error) {
+        console.error("Error fetching movie details:", error);
+        document.querySelector(".movie-details").innerHTML = "<h2>Error loading movie details.</h2>";
+    }
+}
+
+fetchMovieDetails();
+
 
                 // Get movie ID from URL
                 const urlParams = new URLSearchParams(window.location.search);
