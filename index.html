@@ -71,10 +71,12 @@
             let paginatedMovies = movies.slice(start, end);
 
             paginatedMovies.forEach(movie => {
+                const movieSlug = encodeURIComponent(movie.title.replace(/\s+/g, "-").toLowerCase());
+
                 movieList.innerHTML += `
                     <div class="movie-card">
                         <img src="${movie.poster}" alt="${movie.title} Poster" onerror="this.onerror=null; this.src='fallback.jpg'">
-                        <h2>${movie.title}</h2>
+                        <h2><a href="movie.html?id=${movieSlug}">${movie.title}</a></h2>
                         <div class="buttons">
                             <a href="${movie.stream}" class="btn stream">Stream</a>
                             <a href="${movie.download}" class="btn download">Download</a>
