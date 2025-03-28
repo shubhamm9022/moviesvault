@@ -279,3 +279,110 @@ footer a:hover {
         font-size: 1em;
     }
 }
+/* ============================= */
+/* 🎬 Movie Details Page Styling */
+/* ============================= */
+.movie-details {
+    text-align: center;
+    margin-top: 20px;
+    animation: fadeInUp 1s ease-in-out;
+}
+
+/* Back Button */
+.back-btn {
+    display: block;
+    width: fit-content;
+    margin: 20px auto;
+    padding: 10px 15px;
+    font-size: 1em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: #388E3C;
+}
+
+/* Movie Poster */
+.movie-poster {
+    width: 100%;
+    max-width: 280px;
+    border-radius: 10px;
+    margin: 15px auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.movie-poster:hover {
+    transform: scale(1.05);
+}
+
+/* Movie Title */
+.movie-details h1 {
+    font-size: 1.8em;
+    margin: 10px 0;
+}
+
+/* Responsive Buttons */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.btn {
+    padding: 12px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    width: 140px;
+}
+
+/* Stream Button */
+.stream {
+    background-color: transparent;
+    color: #4CAF50;
+    border: 2px solid #4CAF50;
+}
+
+.stream:hover {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+/* Download Button */
+.download {
+    background-color: transparent;
+    color: #2196F3;
+    border: 2px solid #2196F3;
+}
+
+.download:hover {
+    background-color: #2196F3;
+    color: #fff;
+}
+
+/* Mobile Optimization */
+@media (max-width: 480px) {
+    .movie-details h1 {
+        font-size: 1.5em;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 14px 0;
+    }
+}
