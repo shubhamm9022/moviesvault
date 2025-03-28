@@ -13,9 +13,10 @@
 
     <!-- Movie Details Container -->
     <div class="container movie-details">
-        <img id="movie-poster" src="" alt="Movie Poster" class="movie-poster">
-        <h1 id="movie-title"></h1>
-        <div class="buttons">
+        <p id="loading-text">Loading movie details...</p> <!-- Loading Message -->
+        <img id="movie-poster" src="" alt="Movie Poster" class="movie-poster" style="display: none;">
+        <h1 id="movie-title" style="display: none;"></h1>
+        <div class="buttons" style="display: none;">
             <a id="stream-link" href="#" class="btn stream">Stream</a>
             <a id="download-link" href="#" class="btn download">Download</a>
         </div>
@@ -30,7 +31,7 @@
                 const data = await response.text();
                 
                 // Parse CSV properly
-                const rows = data.split("\n").slice(1); // Skip the header row
+                const rows = data.split("\n").slice(1);
                 const movies = rows.map(row => {
                     const columns = row.split(",");
                     return {
@@ -51,19 +52,26 @@
                 );
 
                 if (movie) {
+                    document.getElementById("loading-text").style.display = "none"; // Hide Loading Text
+
                     document.getElementById("movie-title").innerText = movie.title;
                     document.getElementById("movie-poster").src = movie.poster;
                     document.getElementById("stream-link").href = movie.stream;
                     document.getElementById("download-link").href = movie.download;
+
+                    // Show elements after data is loaded
+                    document.getElementById("movie-title").style.display = "block";
+                    document.getElementById("movie-poster").style.display = "block";
+                    document.querySelector(".buttons").style.display = "block";
                 } else {
                     document.querySelector(".movie-details").innerHTML = "<h2>Movie not found!</h2>";
                 }
             } catch (error) {
                 console.error("Error fetching movie details:", error);
+                document.querySelector(".movie-details").innerHTML = "<h2>Error loading movie details.</h2>";
             }
         }
 
-        // Run function on page load
         fetchMovieDetails();
     </script>
 
