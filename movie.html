@@ -66,3 +66,20 @@
 
 </body>
 </html>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const title = urlParams.get("title");
+    const poster = urlParams.get("poster");
+    const stream = urlParams.get("stream");
+    const download = urlParams.get("download");
+
+    if (title && poster) {
+        document.getElementById("moviePoster").src = decodeURIComponent(poster);
+        document.getElementById("movieTitle").innerText = decodeURIComponent(title);
+        document.getElementById("streamBtn").href = decodeURIComponent(stream);
+        document.getElementById("downloadBtn").href = decodeURIComponent(download);
+    } else {
+        document.querySelector(".movie-details").innerHTML = "<h1>Movie Not Found</h1>";
+    }
+</script>
+
