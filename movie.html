@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="logo-title">
+        <img src="logo.png" alt="Movie Vault Logo">
+        <h1>Movie Details</h1>
+    </header>
+
+    <div class="container" id="movie-details">
+        <!-- Movie details will be loaded here dynamically -->
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Movie Vault | <a href="index.html">Back to Home</a></p>
+    </footer>
+
+    <script>
+        async function fetchMovieDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const movieTitle = urlParams.get("title");
+            const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0D7_9n5fJGj30Erv8CEr3rz7UGPh3qdvSx79RiVCf2iuT_yZw51mr-9cdGxpyXbSPTbYXcuHC8cPk/pub?output=csv";
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.text();
+                const rows = data.split("\n").slice(1);
+                const movieDetails = document.getElementById("movie-details");
+                
+                movieDetails.innerHTML = "";
+                rows.forEach(row => {
+                    const [title, poster, stream, download] = row.split(",");
+                    if (title === movieTitle) {
+                        movieDetails.innerHTML = `
+                            <div class="movie-card">
+                                <img src="${poster}" alt="${title} Poster">
+                                <h2>${title}</h2>
+                                <div class="buttons">
+                                    <a href="${stream}" class="btn stream">Stream</a>
+                                    <a href="${download}" class="btn download">Download</a>
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+            } catch (error) {
+                console.error("Error fetching movie details:", error);
+            }
+        }
+        
+        fetchMovieDetails();
+    </script>
+</body>
+</html>
+
