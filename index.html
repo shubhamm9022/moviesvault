@@ -14,41 +14,103 @@
     </div>
 
     <!-- Movies List -->
-    <div class="container">
-        <div class="movie-card">
-            <img src="hridayam.jpg" alt="Hridayam Poster">
-            <h2>Hridayam</h2>
-            <div class="buttons">
-                <a href="stream_hridayam_link" class="btn stream">Stream</a>
-                <a href="download_hridayam_link" class="btn download">Download</a>
-            </div>
-        </div>
-
-        <div class="movie-card">
-            <img src="do_khiladi.jpg" alt="Do Khiladi Poster">
-            <h2>Do Khiladi</h2>
-            <div class="buttons">
-                <a href="stream_do_khiladi_link" class="btn stream">Stream</a>
-                <a href="download_do_khiladi_link" class="btn download">Download</a>
-            </div>
-        </div>
-
-        <div class="movie-card">
-            <img src="middle_class_melodies.jpg" alt="Middle Class Melodies Poster">
-            <h2>Middle Class Melodies</h2>
-            <div class="buttons">
-                <a href="stream_middle_class_melodies_link" class="btn stream">Stream</a>
-                <a href="download_middle_class_melodies_link" class="btn download">Download</a>
-            </div>
-        </div>
+    <div class="container" id="movie-list">
+        <!-- Movies will be loaded dynamically -->
     </div>
 
-    <!-- Footer with Contact and Telegram -->
+    <!-- Pagination -->
+    <div class="pagination">
+        <button id="prevPage" disabled>Previous</button>
+        <span id="pageNumber">1</span>
+        <button id="nextPage">Next</button>
+    </div>
+
+    <!-- Footer -->
     <footer>
         <p>© 2025 Movie Vault</p>
         <p><a href="contact.html">Contact</a> | <a href="https://t.me/movievaultHQ">Join Telegram</a></p>
     </footer>
 
+    <script>
+        const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0D7_9n5fJGj30Erv8CEr3rz7UGPh3qdvSx79RiVCf2iuT_yZw51mr-9cdGxpyXbSPTbYXcuHC8cPk/pub?output=csv";
+        
+        let movies = [];
+        let currentPage = 1;
+        const moviesPerPage = 10;
+
+        async function fetchMovies() {
+            try {
+                const response = await fetch(sheetURL);
+                const data = await response.text();
+                
+                // Parse CSV data
+                const rows = data.split("\n").map(row => row.split(","));
+                const headers = rows[0].map(header => header.trim().toLowerCase());
+
+                movies = rows.slice(1).map(row => {
+                    return {
+                        title: row[headers.indexOf("title")],
+                        poster: row[headers.indexOf("poster")],
+                        stream: row[headers.indexOf("stream")],
+                        download: row[headers.indexOf("download")]
+                    };
+                });
+
+                movies.reverse(); // Show newest movies first
+                displayMovies();
+            } catch (error) {
+                console.error("Error fetching movies:", error);
+            }
+        }
+
+        function displayMovies() {
+            const movieList = document.getElementById("movie-list");
+            movieList.innerHTML = ""; // Clear previous movies
+
+            let start = (currentPage - 1) * moviesPerPage;
+            let end = start + moviesPerPage;
+            let paginatedMovies = movies.slice(start, end);
+
+            paginatedMovies.forEach(movie => {
+                movieList.innerHTML += `
+                    <div class="movie-card">
+                        <img src="${movie.poster}" alt="${movie.title} Poster" onerror="this.src='fallback.jpg'">
+                        <h2>${movie.title}</h2>
+                        <div class="buttons">
+                            <a href="${movie.stream}" class="btn stream">Stream</a>
+                            <a href="${movie.download}" class="btn download">Download</a>
+                        </div>
+                    </div>
+                `;
+            });
+
+            updatePagination();
+        }
+
+        function updatePagination() {
+            document.getElementById("pageNumber").innerText = currentPage;
+            document.getElementById("prevPage").disabled = currentPage === 1;
+            document.getElementById("nextPage").disabled = currentPage * moviesPerPage >= movies.length;
+        }
+
+        document.getElementById("prevPage").addEventListener("click", () => {
+            if (currentPage > 1) {
+                currentPage--;
+                displayMovies();
+            }
+        });
+
+        document.getElementById("nextPage").addEventListener("click", () => {
+            if (currentPage * moviesPerPage < movies.length) {
+                currentPage++;
+                displayMovies();
+            }
+        });
+
+        fetchMovies();
+    </script>
+
 </body>
 </html>
+
 
