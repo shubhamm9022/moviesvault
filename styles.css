@@ -20,7 +20,7 @@ body {
 }
 
 /* ============================= */
-/* 🌟 Logo Styling (No Box, Bigger & Fit) */
+/* 🌟 Logo Styling */
 /* ============================= */
 .logo-container {
     width: 100%;
@@ -30,19 +30,19 @@ body {
 }
 
 .logo {
-    max-width: 350px; /* Bigger Logo */
+    max-width: 280px; /* Perfect size for mobile & desktop */
     height: auto;
 }
 
 /* Responsive Logo */
 @media (max-width: 600px) {
     .logo {
-        max-width: 250px;
+        max-width: 220px;
     }
 }
 
 /* ============================= */
-/* 🎬 Movie Card Styling (Restored Look) */
+/* 🎬 Movie Card Styling */
 /* ============================= */
 .container {
     width: 100%;
@@ -52,11 +52,12 @@ body {
     animation: fadeInUp 1s ease-in-out forwards;
 }
 
+/* Movie Cards */
 .movie-card {
-    background: #222;
+    background: #1a1a1a; /* Dark but stylish */
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Thin stylish border */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     margin-bottom: 15px;
     display: flex;
@@ -73,8 +74,8 @@ body {
 /* Movie Poster Styling */
 .movie-card img {
     width: 100%;
-    max-width: 250px;
-    border-radius: 10px;
+    max-width: 240px; /* Perfect size for mobile & desktop */
+    border-radius: 8px;
     margin-bottom: 10px;
     transition: transform 0.3s ease;
 }
@@ -86,7 +87,7 @@ body {
 
 /* Movie Title */
 h2 {
-    font-size: 1.4em;
+    font-size: 1.3em;
     margin-bottom: 10px;
     color: #fff;
 }
@@ -101,23 +102,27 @@ h2 {
     margin-top: 10px;
 }
 
+/* Button Styling */
 .btn {
-    padding: 8px 16px;
+    padding: 10px 20px;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
     transition: transform 0.3s ease, background 0.3s ease;
-    font-size: 0.9em;
+    font-size: 0.95em;
+    font-weight: bold;
 }
 
 /* Stream Button */
 .stream {
     background-color: #4CAF50;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Download Button */
 .download {
     background-color: #2196F3;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Button Hover */
@@ -134,6 +139,7 @@ footer {
     font-size: 0.9em;
     opacity: 0;
     animation: fadeInUp 1s ease-in-out 1s forwards;
+    text-align: center;
 }
 
 /* Footer Links */
@@ -141,6 +147,7 @@ footer a {
     color: #4CAF50;
     text-decoration: none;
     transition: color 0.3s ease;
+    font-weight: bold;
 }
 
 footer a:hover {
@@ -152,11 +159,11 @@ footer a:hover {
 /* ============================= */
 @media (max-width: 480px) {
     .container {
-        width: 90%;
+        width: 95%;
     }
 
     .movie-card {
-        padding: 10px;
+        padding: 12px;
     }
 
     h2 {
@@ -165,16 +172,16 @@ footer a:hover {
 
     .buttons {
         flex-direction: column;
-        gap: 5px;
+        gap: 8px;
     }
 
     .btn {
         width: 100%;
-        padding: 10px 0;
+        padding: 12px 0;
     }
 
     footer {
-        font-size: 0.8em;
+        font-size: 0.85em;
     }
 }
 
@@ -203,3 +210,4 @@ footer a:hover {
         opacity: 1;
     }
 }
+
