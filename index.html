@@ -3,28 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Vault HQ</title>
+    <title>Movie Vault</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header class="logo-title">
+        <img src="logo.png" alt="Movie Vault Logo">
+        <h1>Movie Vault</h1>
+    </header>
 
-    <div class="container">
-        <h1>Movie Vault HQ</h1>
-
-        <div class="movie-card">
-            <img id="movie-poster" src="poster-placeholder.jpg" alt="Movie Poster">
-            <h2 id="movie-title">Loading...</h2>
-            <div class="buttons">
-                <a id="stream-link" href="#" class="btn stream">Stream</a>
-                <a id="download-link" href="#" class="btn download">Download</a>
-            </div>
-        </div>
-
-        <footer>
-            <p>Follow us on Telegram: <a href="https://t.me/movievaultHQ">@movievaultHQ</a></p>
-        </footer>
+    <div class="container" id="movie-list">
+        <!-- Movies will be loaded here dynamically -->
     </div>
 
-    <script src="script.js"></script>
+    <footer>
+        <p>&copy; 2025 Movie Vault | <a href="#">Contact</a></p>
+    </footer>
+
+    <script>
+        async function fetchMovies() {
+            const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0D7_9n5fJGj30Erv8CEr3rz7UGPh3qdvSx79RiVCf2iuT_yZw51mr-9cdGxpyXbSPTbYXcuHC8cPk/pub?output=csv";
+            try {
+                const response = await fetch(url);
+                const data = await response.text();
+                const rows = data.split("\n").slice(1, 11); // Limit to 10 movies
+                const movieList = document.getElementById("movie-list");
+                
+                movieList.innerHTML = "";
+                rows.forEach(row => {
+                    const [title, poster, stream, download] = row.split(",");
+                    if (title && poster && stream && download) {
+                        const movieCard = `
+                            <div class="movie-card">
+                                <a href="movie.html?title=${encodeURIComponent(title)}">
+                                    <img src="${poster}" alt="${title} Poster">
+                                    <h2>${title}</h2>
+                                </a>
+                                <div class="buttons">
+                                    <a href="${stream}" class="btn stream">Stream</a>
+                                    <a href="${download}" class="btn download">Download</a>
+                                </div>
+                            </div>
+                        `;
+                        movieList.innerHTML += movieCard;
+                    }
+                });
+            } catch (error) {
+                console.error("Error fetching movie data:", error);
+            }
+        }
+        
+        fetchMovies();
+    </script>
 </body>
 </html>
