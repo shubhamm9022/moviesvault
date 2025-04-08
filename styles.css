@@ -64,7 +64,7 @@ header {
   flex: 0 0 auto;
   padding: 0.8rem 1.5rem;
   border: none;
-  background-color: #3b3b3b;
+  background-color: #007BFF;
   color: white;
   border-radius: 5px;
   cursor: pointer;
@@ -82,7 +82,7 @@ header {
 }
 
 .notice-box a {
-  color: #f1d204;
+  color: #2F4F4F;
   font-weight: bold;
   text-decoration: none;
 }
