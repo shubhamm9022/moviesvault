@@ -98,11 +98,11 @@
     
     /* Main container */
     .file-container {
-      max-width: 500px;
+      max-width: 600px;
       width: 90%;
       background-color: rgba(10, 10, 10, 0.92);
       border-radius: 20px;
-      padding: 2rem;
+      padding: 2.5rem;
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(16px);
@@ -126,7 +126,7 @@
     /* File info */
     .file-name {
       font-family: var(--display);
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       font-weight: 700;
       margin-bottom: 1.5rem;
       color: var(--light);
@@ -134,11 +134,42 @@
       line-height: 1.4;
     }
     
+    /* Stylish separator */
+    .file-separator {
+      display: flex;
+      align-items: center;
+      margin: 1.5rem 0;
+      color: var(--gray);
+      font-size: 0.8rem;
+    }
+    
+    .file-separator::before,
+    .file-separator::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    }
+    
+    .file-separator span {
+      padding: 0 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+    }
+    
     .file-meta {
       color: var(--gray);
       margin-bottom: 2rem;
       font-size: 0.95rem;
       display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    
+    .meta-item {
+      display: flex;
+      align-items: center;
       gap: 0.5rem;
     }
     
@@ -153,7 +184,7 @@
       color: var(--accent-light);
     }
     
-    /* Download buttons */
+    /* Download options */
     .download-options {
       display: flex;
       flex-direction: column;
@@ -161,7 +192,7 @@
     }
     
     .download-btn {
-      padding: 1rem 1.5rem;
+      padding: 1.1rem 1.5rem;
       border-radius: 12px;
       font-family: var(--display);
       font-weight: 700;
@@ -246,19 +277,14 @@
     }
     
     /* Responsive design */
-    @media (min-width: 768px) {
+    @media (min-width: 992px) {
       .file-container {
-        max-width: 600px;
-        padding: 2.5rem;
+        max-width: 700px;
+        padding: 3rem;
       }
       
       .file-name {
-        font-size: 1.5rem;
-      }
-      
-      .file-meta {
-        font-size: 1rem;
-        grid-template-columns: repeat(3, 1fr);
+        font-size: 1.7rem;
       }
       
       .download-options {
@@ -267,44 +293,39 @@
       }
       
       .download-btn {
-        flex: 1 1 45%;
-        min-width: 200px;
+        flex: 1 1 30%;
+        min-width: 0;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .file-meta {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+      }
+      
+      .file-separator {
+        margin: 1.25rem 0;
       }
     }
     
     @media (max-width: 500px) {
       .file-container {
-        padding: 1.5rem;
+        padding: 1.75rem;
       }
       
       .file-name {
-        font-size: 1.1rem;
+        font-size: 1.25rem;
       }
       
-      .file-meta {
-        font-size: 0.85rem;
-        grid-template-columns: 1fr;
-      }
-      
-      .download-btn {
-        padding: 0.9rem 1.2rem;
-        font-size: 0.9rem;
-      }
-    }
-    
-    /* Tablet specific */
-    @media (min-width: 501px) and (max-width: 767px) {
-      .file-container {
-        max-width: 90%;
-      }
-      
-      .download-options {
-        flex-direction: row;
-        flex-wrap: wrap;
+      .file-separator span {
+        font-size: 0.7rem;
+        padding: 0 0.75rem;
       }
       
       .download-btn {
-        flex: 1 1 45%;
+        padding: 1rem 1.25rem;
+        font-size: 0.95rem;
       }
     }
   </style>
@@ -324,9 +345,23 @@
     
     <!-- File meta -->
     <div class="file-meta">
-      <div><i class="fas fa-database"></i> Size: 1.02GB</div>
-      <div><i class="far fa-clock"></i> Uploaded 15 hours ago</div>
-      <div><i class="fas fa-user"></i> by <a href="#" class="uploader">OlaMovies</a></div>
+      <div class="meta-item">
+        <i class="fas fa-database"></i>
+        <span>Size: 1.02GB</span>
+      </div>
+      <div class="meta-item">
+        <i class="far fa-clock"></i>
+        <span>Uploaded 15 hours ago</span>
+      </div>
+      <div class="meta-item">
+        <i class="fas fa-user"></i>
+        <span>by <a href="#" class="uploader">OlaMovies</a></span>
+      </div>
+    </div>
+    
+    <!-- Stylish separator -->
+    <div class="file-separator">
+      <span>Download Options</span>
     </div>
     
     <!-- Download options -->
