@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>File Download - OMDrive</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>File Download - OMDrive Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #4361ee;
-      --primary-dark: #3a0ca3;
-      --primary-light: #4895ef;
-      --accent: #f72585;
-      --accent-light: #ff70a8;
-      --dark: #0a0a0a;
-      --darker: #050505;
+      --primary: #3a86ff;
+      --primary-dark: #2667cc;
+      --accent: #8338ec;
+      --dark: #121218;
+      --darker: #0a0a0e;
       --light: #ffffff;
-      --gray: #a1a1aa;
-      --gray-light: #e4e4e7;
-      --display: 'Plus Jakarta Sans', sans-serif;
-      --premium: 'Montserrat', sans-serif;
+      --gray: #b8b8c5;
+      --gray-light: #e8e8ee;
+      --sans: 'Manrope', sans-serif;
+      --serif: 'Playfair Display', serif;
     }
     
     * {
@@ -31,90 +31,25 @@
     body {
       background-color: var(--darker);
       color: var(--light);
+      font-family: var(--sans);
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      padding: 1rem;
-      position: relative;
-      overflow-x: hidden;
-      line-height: 1.5;
-      font-family: var(--premium);
-    }
-    
-    /* Premium background elements */
-    .bg-effect {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
-    }
-    
-    .bg-circle {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.15;
-      animation: float 25s linear infinite alternate;
-    }
-    
-    .bg-circle:nth-child(1) {
-      width: 600px;
-      height: 600px;
-      background: var(--primary-dark);
-      top: -150px;
-      left: -150px;
-    }
-    
-    .bg-circle:nth-child(2) {
-      width: 400px;
-      height: 400px;
-      background: var(--accent);
-      bottom: -100px;
-      right: -100px;
-      animation: float 20s linear infinite alternate-reverse;
-    }
-    
-    .bg-circle:nth-child(3) {
-      width: 500px;
-      height: 500px;
-      background: var(--primary-light);
-      top: 50%;
-      right: -150px;
-      animation: float 30s linear infinite;
-    }
-    
-    @keyframes float {
-      0% { transform: translate(0, 0) rotate(0deg); }
-      25% { transform: translate(30px, 30px) rotate(5deg); }
-      50% { transform: translate(0, 50px) rotate(0deg); }
-      75% { transform: translate(-30px, 30px) rotate(-5deg); }
-      100% { transform: translate(-30px, 0) rotate(-10deg); }
-    }
-    
-    /* Main container */
-    .file-container {
-      max-width: 600px;
-      width: 90%;
-      background-color: rgba(10, 10, 10, 0.92);
-      border-radius: 20px;
+      align-items: center;
       padding: 2rem;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(16px);
-      position: relative;
-      overflow: hidden;
-      margin: 1rem 0;
-      animation: fadeIn 0.6s ease-out;
+      line-height: 1.6;
     }
     
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .file-container {
+      max-width: 640px;
+      width: 100%;
+      background-color: var(--dark);
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
     }
     
     .file-container::before {
@@ -124,303 +59,144 @@
       left: 0;
       right: 0;
       height: 4px;
-      background: linear-gradient(90deg, var(--accent), var(--primary-light), var(--primary));
-      box-shadow: 0 0 20px rgba(247, 37, 133, 0.4),
-                  0 0 30px rgba(72, 149, 239, 0.3);
-      animation: rainbow 8s linear infinite;
-      background-size: 400% 100%;
+      background: linear-gradient(90deg, var(--accent), var(--primary));
     }
     
-    @keyframes rainbow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    
-    /* File info */
     .file-name {
-      font-family: var(--display);
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 1.25rem;
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
       color: var(--light);
       word-break: break-word;
       line-height: 1.4;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    }
-    
-    /* Stylish separator without text */
-    .file-separator {
-      position: relative;
-      height: 1px;
-      margin: 1.75rem 0;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    }
-    
-    .file-separator::after {
-      content: '';
-      position: absolute;
-      left: 25%;
-      right: 25%;
-      height: 1px;
-      top: 0;
-      background: linear-gradient(90deg, transparent, var(--primary-light), var(--accent-light), transparent);
-      box-shadow: 0 0 10px var(--primary-light),
-                  0 0 20px var(--accent-light);
-      animation: separatorGlow 3s ease-in-out infinite alternate;
-    }
-    
-    @keyframes separatorGlow {
-      0% { opacity: 0.3; left: 25%; right: 25%; }
-      50% { opacity: 1; left: 15%; right: 15%; }
-      100% { opacity: 0.3; left: 25%; right: 25%; }
     }
     
     .file-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
       color: var(--gray);
-      margin-bottom: 1rem;
-      font-size: 0.9rem;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
+      font-size: 0.95rem;
     }
     
     .meta-item {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      transition: transform 0.3s ease;
-    }
-    
-    .meta-item:hover {
-      transform: translateX(5px);
     }
     
     .meta-item i {
-      color: var(--primary-light);
-      font-size: 0.9rem;
+      color: var(--primary);
+      font-size: 1rem;
     }
     
     .uploader {
-      color: var(--primary-light);
+      color: var(--primary);
       text-decoration: none;
       font-weight: 600;
       transition: all 0.3s ease;
-      position: relative;
-      font-size: 0.9rem;
     }
     
     .uploader:hover {
-      color: var(--accent-light);
+      color: var(--accent);
     }
     
-    .uploader::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--accent-light);
-      transition: width 0.3s ease;
-    }
-    
-    .uploader:hover::after {
-      width: 100%;
-    }
-    
-    /* Download options */
     .download-options {
       display: flex;
       flex-direction: column;
-      gap: 0.8rem;
+      gap: 1rem;
     }
     
     .download-btn {
-      padding: 0.9rem 1rem;
-      border-radius: 10px;
-      font-family: var(--display);
-      font-weight: 700;
-      text-decoration: none;
-      color: var(--light);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      border: none;
-      z-index: 1;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      letter-spacing: 0.5px;
-      font-size: 0.9rem;
-    }
-    
-    .btn-cloud {
-      background: linear-gradient(45deg, #3f37c9, #4cc9f0);
-      box-shadow: 0 4px 20px rgba(79, 55, 201, 0.5);
-    }
-    
-    .btn-drive {
-      background: linear-gradient(45deg, #b5179e, #f72585);
-      box-shadow: 0 4px 20px rgba(247, 37, 133, 0.5);
-    }
-    
-    .btn-mirror {
-      background: linear-gradient(45deg, #2b9348, #80b918);
-      box-shadow: 0 4px 20px rgba(43, 147, 72, 0.5);
-    }
-    
-    .download-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(67, 97, 238, 0.8);
+      padding: 1.25rem 1.75rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
     }
     
     .download-btn::before {
       content: '';
       position: absolute;
       top: 0;
-      left: -100%;
+      left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: 0.6s;
+      background: linear-gradient(90deg, rgba(58, 134, 255, 0.1), rgba(131, 56, 236, 0.1));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .download-btn:hover {
+      background: rgba(58, 134, 255, 0.1);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     }
     
     .download-btn:hover::before {
-      left: 100%;
+      opacity: 1;
     }
     
     .download-btn i {
-      font-size: 1em;
-      transition: all 0.4s ease;
+      margin-right: 1rem;
+      font-size: 1.25rem;
+      color: var(--primary);
+      transition: all 0.3s ease;
     }
     
     .download-btn:hover i {
-      transform: scale(1.2) rotate(10deg);
-      filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+      transform: scale(1.1);
+      color: var(--accent);
     }
     
-    /* Pulse animation for buttons */
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.02); }
-      100% { transform: scale(1); }
-    }
-    
-    .download-btn {
-      animation: pulse 4s ease-in-out infinite;
-    }
-    
-    .btn-drive {
-      animation-delay: 0.5s;
-    }
-    
-    .btn-mirror {
-      animation-delay: 1s;
-    }
-    
-    /* Loading state */
-    .download-btn.loading {
-      pointer-events: none;
-      animation: none;
-    }
-    
-    .download-btn.loading::after {
-      content: '';
-      position: absolute;
-      width: 18px;
-      height: 18px;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      border-top-color: white;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      z-index: 3;
-    }
-    
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    
-    /* Responsive design */
-    @media (min-width: 992px) {
+    @media (max-width: 768px) {
       .file-container {
-        max-width: 650px;
-        padding: 2.5rem;
+        padding: 2rem;
       }
       
       .file-name {
         font-size: 1.3rem;
       }
       
-      .download-options {
-        flex-direction: row;
+      .file-meta {
+        flex-direction: column;
+        gap: 1rem;
       }
       
       .download-btn {
-        flex: 1;
-        padding: 1rem 1.25rem;
-        font-size: 1rem;
+        padding: 1.1rem 1.5rem;
       }
     }
     
-    @media (max-width: 768px) {
-      .file-meta {
-        grid-template-columns: 1fr 1fr;
-        gap: 0.75rem;
-      }
-      
-      .file-separator {
-        margin: 1.5rem 0;
-      }
-    }
-    
-    @media (max-width: 500px) {
-      .file-container {
+    @media (max-width: 480px) {
+      body {
         padding: 1.5rem;
       }
       
-      .file-name {
-        font-size: 1rem;
-        margin-bottom: 1rem;
+      .file-container {
+        padding: 1.75rem;
       }
       
-      .file-meta {
-        grid-template-columns: 1fr;
-        font-size: 0.85rem;
+      .file-name {
+        font-size: 1.2rem;
       }
       
       .download-btn {
-        padding: 0.8rem;
-        font-size: 0.85rem;
-      }
-      
-      .meta-item i {
-        font-size: 0.8rem;
-      }
-    }
-    
-    @media (max-width: 400px) {
-      .file-container {
-        padding: 1.25rem;
-      }
-      
-      .download-btn i {
-        display: none;
+        padding: 1rem 1.25rem;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Premium Background -->
-  <div class="bg-effect">
-    <div class="bg-circle"></div>
-    <div class="bg-circle"></div>
-    <div class="bg-circle"></div>
-  </div>
-  
-  <!-- File container -->
   <div class="file-container">
     <!-- File name -->
     <div class="file-name">Thunderbolts.A.K.A.The.New.Avengers.2025.720p.10bit.BluRay.6CH.x265.HEVC-PSA.mkv</div>
@@ -441,46 +217,52 @@
       </div>
     </div>
     
-    <!-- Stylish separator without text -->
-    <div class="file-separator"></div>
-    
     <!-- Download options -->
     <div class="download-options">
-      <a href="#" class="download-btn btn-cloud"><i class="fas fa-cloud-download-alt"></i> Cloud Download</a>
-      <a href="#" class="download-btn btn-drive"><i class="fas fa-bolt"></i> Transfer to Drive</a>
-      <a href="#" class="download-btn btn-mirror"><i class="fas fa-server"></i> GDFlix Mirror</a>
+      <a href="#" class="download-btn">
+        <i class="fas fa-cloud-download-alt"></i>
+        <span>Cloud Download</span>
+      </a>
+      <a href="#" class="download-btn">
+        <i class="fas fa-bolt"></i>
+        <span>Transfer to Drive</span>
+      </a>
+      <a href="#" class="download-btn">
+        <i class="fas fa-server"></i>
+        <span>GDFlix Mirror</span>
+      </a>
     </div>
   </div>
 
   <script>
-    // Add loading state to buttons
+    // Enhanced button interaction
     document.querySelectorAll('.download-btn').forEach(button => {
       button.addEventListener('click', function(e) {
         e.preventDefault();
         const originalContent = this.innerHTML;
-        this.classList.add('loading');
-        this.innerHTML = '';
         
-        // Simulate download after 2 seconds
+        // Add loading state
+        this.innerHTML = `
+          <i class="fas fa-circle-notch fa-spin"></i>
+          <span>Processing...</span>
+        `;
+        this.style.pointerEvents = 'none';
+        
+        // Simulate processing
         setTimeout(() => {
-          this.classList.remove('loading');
-          this.innerHTML = originalContent;
+          this.innerHTML = `
+            <i class="fas fa-check"></i>
+            <span>Download Starting</span>
+          `;
+          
+          // Reset after delay
+          setTimeout(() => {
+            this.innerHTML = originalContent;
+            this.style.pointerEvents = 'auto';
+          }, 1500);
         }, 2000);
       });
     });
-    
-    // Add subtle floating animation to container
-    const container = document.querySelector('.file-container');
-    let floatValue = 0;
-    
-    function floatAnimation() {
-      floatValue += 0.005;
-      const yOffset = Math.sin(floatValue) * 3;
-      container.style.transform = `translateY(${yOffset}px)`;
-      requestAnimationFrame(floatAnimation);
-    }
-    
-    floatAnimation();
   </script>
 </body>
 </html>
