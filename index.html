@@ -74,9 +74,15 @@
         <select id="quality">
           <option value="480p">480p</option>
           <option value="720p">720p</option>
+          <option value="720p 10-Bit">720p 10-Bit</option>
           <option value="1080p">1080p</option>
+          <option value="1080p 10-Bit">1080p 10-Bit</option>
           <option value="2160p">2160p</option>
         </select>
+
+        <!-- ✅ Added Size Field -->
+        <label>Size:</label>
+        <input type="number" id="seriesSize" placeholder="Enter size (e.g. 350)">
 
         <label>Size Unit:</label>
         <select id="sizeUnit">
@@ -151,6 +157,7 @@
         document.getElementById("seriesTitle").value = "";
         document.getElementById("languageSeries").value = "";
         document.getElementById("quality").selectedIndex = 0;
+        document.getElementById("seriesSize").value = ""; // ✅ reset new size
         document.getElementById("sizeUnit").selectedIndex = 0;
         document.getElementById("episodes").innerHTML = "";
         addEpisode(); // re-add default row
@@ -236,10 +243,14 @@
         const title = document.getElementById("seriesTitle").value.trim();
         const language = document.getElementById("languageSeries").value.trim();
         const quality = document.getElementById("quality").value;
+        const sizeValue = document.getElementById("seriesSize").value.trim();
         const sizeUnit = document.getElementById("sizeUnit").value;
+
+        let sizeText = sizeValue ? `[${sizeValue}${sizeUnit}]` : `[${sizeUnit}]`;
+
         html += `<div style="margin:15px 0;padding-bottom:15px;border-bottom:1px solid #ddd;text-align:center;">\n`;
         html += `  <div style="font-size:18px;font-weight:600;">\n`;
-        html += `    ${title} <span style="color:gold;">[${language}]</span> ${quality} [${sizeUnit}]\n`;
+        html += `    ${title} <span style="color:gold;">[${language}]</span> ${quality} ${sizeText}\n`;
         html += `  </div>\n  <div style="margin-top:12px;">\n`;
         document.querySelectorAll(".episode-row").forEach(row => {
           const epNum = row.querySelector(".episodeNumber").value.trim();
